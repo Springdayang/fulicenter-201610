@@ -1,16 +1,8 @@
 package cn.ucai.fulicenter.controller.bean;
 
-/**
- * Created by Administrator on 2017/1/9 0009.
- */
-public class AlbumsBean {
+import java.io.Serializable;
 
-    /**
-     * pid : 7672
-     * imgId : 28283
-     * imgUrl : 201509/goods_img/7672_P_1442389445199.jpg
-     * thumbUrl : no_picture.gif
-     */
+public class AlbumsBean implements Serializable {
 
     private int pid;
     private int imgId;

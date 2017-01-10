@@ -1,22 +1,9 @@
 package cn.ucai.fulicenter.controller.bean;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.Arrays;
 
-/**
- * Created by Administrator on 2017/1/9 0009.
- */
-public class PropertiesBean {
-
-    /**
-     * id : 9522
-     * goodsId : 0
-     * colorId : 4
-     * colorName : 绿色
-     * colorCode : #59d85c
-     * colorImg : 201309/1380064997570506166.jpg
-     * colorUrl : 1
-     * albums : [{"pid":7672,"imgId":28283,"imgUrl":"201509/goods_img/7672_P_1442389445199.jpg","thumbUrl":"no_picture.gif"}]
-     */
+public class PropertiesBean implements Serializable {
 
     private int id;
     private int goodsId;
@@ -25,7 +12,7 @@ public class PropertiesBean {
     private String colorCode;
     private String colorImg;
     private String colorUrl;
-    private List<AlbumsBean> albums;
+    private AlbumsBean[] albums;
 
     public int getId() {
         return id;
@@ -83,11 +70,11 @@ public class PropertiesBean {
         this.colorUrl = colorUrl;
     }
 
-    public List<AlbumsBean> getAlbums() {
+    public AlbumsBean[] getAlbums() {
         return albums;
     }
 
-    public void setAlbums(List<AlbumsBean> albums) {
+    public void setAlbums(AlbumsBean[] albums) {
         this.albums = albums;
     }
 
@@ -101,7 +88,7 @@ public class PropertiesBean {
                 ", colorCode='" + colorCode + '\'' +
                 ", colorImg='" + colorImg + '\'' +
                 ", colorUrl='" + colorUrl + '\'' +
-                ", albums=" + albums +
+                ", albums=" + Arrays.toString(albums) +
                 '}';
     }
 }

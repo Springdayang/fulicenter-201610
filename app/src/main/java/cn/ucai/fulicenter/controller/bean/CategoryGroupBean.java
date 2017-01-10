@@ -1,14 +1,13 @@
 package cn.ucai.fulicenter.controller.bean;
 
-/**
- * Created by Administrator on 2017/1/9 0009.
- */
-public class CategoryGroupBean {
+import java.io.Serializable;
+
+public class CategoryGroupBean implements Serializable {
 
     /**
-     * id : 261
-     * name : 美妆
-     * imageUrl : muying/1.jpg
+     * id : 334
+     * name : 配饰
+     * imageUrl : muying/Jewelry.png
      */
 
     private int id;
@@ -37,14 +36,5 @@ public class CategoryGroupBean {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "CategoryGroupBean{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                '}';
     }
 }
