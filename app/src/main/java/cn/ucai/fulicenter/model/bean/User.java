@@ -1,4 +1,4 @@
-package cn.ucai.fulicenter.controller.bean;
+package cn.ucai.fulicenter.model.bean;
 
 
 import cn.ucai.fulicenter.application.I;

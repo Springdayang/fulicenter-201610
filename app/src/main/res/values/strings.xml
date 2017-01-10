@@ -49,5 +49,6 @@
     <string name="boutique">精选</string>
     <string name="category">分类</string>
     <string name="cart">购物车</string>
+
     <style name="personal_center">我</style>
 </resources>
