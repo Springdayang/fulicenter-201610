@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         radioButton[2]=rbBoutique;
         radioButton[3]=rbCart;
         radioButton[4]=rbPerson;
+        radioButton[0].setChecked(true);
     }
     public void onViewClick(View view){
         switch (view.getId()){
