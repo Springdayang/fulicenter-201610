@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.controller.adapter.NewGoodsAdapter;
@@ -28,36 +30,41 @@ import cn.ucai.fulicenter.view.SpaceItemDecoration;
  * A simple {@link Fragment} subclass.
  */
 public class NewsGoodsFragment extends Fragment {
-    RecyclerView recyclerView;
-    SwipeRefreshLayout swipeRefreshLayout;
     GridLayoutManager gridLayoutManager;
     NewGoodsAdapter adapter;
-    TextView tvRefresh;
-    public  ArrayList<NewGoodsBean>list;
+    public ArrayList<NewGoodsBean> list;
     IModelNewGoods modelNewGoods;
-    int pageId=1;
-    static  final int ACTION_DOWNLOAD=0;
-    static  final int ACTION_PULL_DOWN_DOWNLOAD=1;
-    static  final int ACTION_PULL_UP_DOWNLOAD=2;
+    int pageId = 1;
+    static final int ACTION_DOWNLOAD = 0;
+    static final int ACTION_PULL_DOWN_DOWNLOAD = 1;
+    static final int ACTION_PULL_UP_DOWNLOAD = 2;
+    @BindView(R.id.tvRefresh)
+    TextView tvRefresh;
+    @BindView(R.id.recycler)
+    RecyclerView recycler;
+    @BindView(R.id.srl)
+    SwipeRefreshLayout srl;
+
     public NewsGoodsFragment() {
     }
 
-    private void setListener(){
+    private void setListener() {
         setPullUpListener();//上拉加载
         setPullDownListener();//下拉刷新
     }
+
     private void setPullUpListener() {
-        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        recycler.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                final int  position=gridLayoutManager.findLastVisibleItemPosition();
-                adapter.setDrag(newState==RecyclerView.SCROLL_STATE_DRAGGING);
-                if(newState==RecyclerView.SCROLL_STATE_IDLE
-                        &&adapter.isMore()
-                        &&position==adapter.getItemCount()-1){
+                final int position = gridLayoutManager.findLastVisibleItemPosition();
+                adapter.setDrag(newState == RecyclerView.SCROLL_STATE_DRAGGING);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
+                        && adapter.isMore()
+                        && position == adapter.getItemCount() - 1) {
                     pageId++;
-                    downLoadData(ACTION_PULL_UP_DOWNLOAD,pageId);
+                    downLoadData(ACTION_PULL_UP_DOWNLOAD, pageId);
                 }
             }
 
@@ -65,38 +72,40 @@ public class NewsGoodsFragment extends Fragment {
 
 
     }
+
     private void setPullDownListener() {
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                pageId=1;
+                pageId = 1;
                 tvRefresh.setVisibility(View.VISIBLE);
-                swipeRefreshLayout.setRefreshing(true);
-                downLoadData(ACTION_PULL_DOWN_DOWNLOAD,pageId);
+                srl.setRefreshing(true);
+                downLoadData(ACTION_PULL_DOWN_DOWNLOAD, pageId);
             }
         });
     }
-    private void downLoadData(final int action, int pageId){
+
+    private void downLoadData(final int action, int pageId) {
         modelNewGoods.downData(getContext(), I.CAT_ID, pageId, new OkHttpUtils.OnCompleteListener<NewGoodsBean[]>() {
             @Override
             public void onSuccess(NewGoodsBean[] result) {
-                adapter.setMore(result!=null&&result.length>0);
-                if(!adapter.isMore()){
-                    if (action==ACTION_PULL_UP_DOWNLOAD){
+                adapter.setMore(result != null && result.length > 0);
+                if (!adapter.isMore()) {
+                    if (action == ACTION_PULL_UP_DOWNLOAD) {
                         adapter.setFoot("没有更多数据加载");
                     }
                     return;
                 }
                 adapter.setFoot("加载更多数据");
-                if (result!=null&&result.length>0){
-                    ArrayList<NewGoodsBean>list= ConvertUtils.array2List(result);
-                    switch (action){
+                if (result != null && result.length > 0) {
+                    ArrayList<NewGoodsBean> list = ConvertUtils.array2List(result);
+                    switch (action) {
                         case ACTION_DOWNLOAD:
                             adapter.initData(list);
                             break;
                         case ACTION_PULL_DOWN_DOWNLOAD:
                             tvRefresh.setVisibility(View.GONE);
-                            swipeRefreshLayout.setRefreshing(false);
+                            srl.setRefreshing(false);
                             adapter.initData(list);
                             break;
                         case ACTION_PULL_UP_DOWNLOAD:
@@ -105,43 +114,40 @@ public class NewsGoodsFragment extends Fragment {
                     }
                 }
             }
+
             @Override
             public void onError(String error) {
             }
         });
-
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_news_goods, container, false);
-        modelNewGoods=new ModelNewGoods();
+        View view = inflater.inflate(R.layout.fragment_news_goods, container, false);
+        modelNewGoods = new ModelNewGoods();
         initView(view);
-        downLoadData(ACTION_DOWNLOAD,pageId);
+        downLoadData(ACTION_DOWNLOAD, pageId);
         setListener();
+        ButterKnife.bind(this, view);
         return view;
     }
-    private void initView(View view){
-        recyclerView= (RecyclerView) view.findViewById(R.id.recycler);
-        swipeRefreshLayout= (SwipeRefreshLayout) view.findViewById(R.id.srl);
-        tvRefresh= (TextView) view.findViewById(R.id.tvRefresh);
-        swipeRefreshLayout.setColorSchemeColors(
+
+    private void initView(View view) {
+        srl.setColorSchemeColors(
                 getResources().getColor(R.color.google_green),
                 getResources().getColor(R.color.google_red),
                 getResources().getColor(R.color.google_yellow),
                 getResources().getColor(R.color.google_blue)
 
         );
-        gridLayoutManager=new GridLayoutManager(getContext(),I.COLUM_NUM);
-        list=new ArrayList<>();
-        adapter=new NewGoodsAdapter(getContext(),list);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(12));
-        recyclerView.setHasFixedSize(true);//自适应
+        gridLayoutManager = new GridLayoutManager(getContext(), I.COLUM_NUM);
+        list = new ArrayList<>();
+        adapter = new NewGoodsAdapter(getContext(), list);
+        recycler.setAdapter(adapter);
+        recycler.setLayoutManager(gridLayoutManager);
+        recycler.addItemDecoration(new SpaceItemDecoration(12));
+        recycler.setHasFixedSize(true);//自适应
     }
 
     @Override
