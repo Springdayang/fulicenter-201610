@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="cn.ucai.fulicenter.controller.activity.MainActivity">
-    <fragment
+    <FrameLayout
         android:id="@+id/fragment"
-        android:name="cn.ucai.fulicenter.controller.fragment.NewsGoodsFragment"
         android:layout_above="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

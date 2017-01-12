@@ -2,7 +2,6 @@ package cn.ucai.fulicenter.controller.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +22,37 @@ public class NewGoodsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     Context context;
     ArrayList<NewGoodsBean>list;
     LayoutInflater inflater;
+    String foot;
+    boolean isMore;
+    boolean isDrag;
+    static  final int TYPE_ITEM=1;
+    static final int TYPE_FOOT=0;
+
+    public String getFoot() {
+        return foot;
+    }
+
+    public void setFoot(String foot) {
+        this.foot = foot;
+        notifyDataSetChanged();
+    }
+
+    public boolean isMore() {
+        return isMore;
+    }
+
+    public void setMore(boolean more) {
+        isMore = more;
+    }
+
+    public boolean isDrag() {
+        return isDrag;
+    }
+
+    public void setDrag(boolean drag) {
+        isDrag = drag;
+    }
+
     public NewGoodsAdapter(Context context, ArrayList<NewGoodsBean> list){
         this.context=context;
         this.list=list;
@@ -32,23 +62,36 @@ public class NewGoodsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if(this.list!=null){
             this.list.clear();
         }
-
+            addData(list);
+    }
+    public void addData(ArrayList<NewGoodsBean>list){
         this.list.addAll(list);
-        Log.i("dayang","onBindViewHolder"+"---------------"+list.size()+"---");
         notifyDataSetChanged();
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.new_goods_item,null);
-        Log.i("dayang","onCreateViewHolder"+"---------------");
-        RecyclerView.ViewHolder viewHolder=new GoodsViewHolder(view);
+        RecyclerView.ViewHolder viewHolder=null;
+        switch (viewType){
+            case TYPE_ITEM:
+                View view=inflater.inflate(R.layout.new_goods_item,null);
+                viewHolder=new GoodsViewHolder(view);
+                break;
+            case TYPE_FOOT:
+                View view1=inflater.inflate(R.layout.foot_item,null);
+                viewHolder=new FootsViewHolder(view1);
+                break;
+        }
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (getItemViewType(position)==TYPE_FOOT){
+            FootsViewHolder viewHolder=(FootsViewHolder)holder;
+            viewHolder.tvFoot.setText(getFoot());
+            return ;
+        }
         GoodsViewHolder viewHolder=(GoodsViewHolder)holder;
-        Log.i("dayang","onBindViewHolder"+"---------------");
         viewHolder.mTvNewGoodsPrice.setText(list.get(position).getPromotePrice());
         viewHolder.mTvNewGoodsName.setText(list.get(position).getGoodsName());
         ImageLoader.downloadImg(context,viewHolder.mIvNewGoods,list.get(position).getGoodsThumb());
@@ -56,9 +99,17 @@ public class NewGoodsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        Log.i("dayang","getItemCount"+"---------------"+list.size());
-        return this.list.size();
+        return this.list.size()+1;
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(position==getItemCount()-1){
+            return TYPE_FOOT;
+        }
+        return TYPE_ITEM;
+    }
+
     static class GoodsViewHolder extends RecyclerView.ViewHolder{
         ImageView mIvNewGoods;
         TextView mTvNewGoodsName;
@@ -68,6 +119,13 @@ public class NewGoodsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             mIvNewGoods= (ImageView) itemView.findViewById(R.id.ivNewGoods);
             mTvNewGoodsName= (TextView) itemView.findViewById(R.id.tvNewGoodsName);
             mTvNewGoodsPrice= (TextView) itemView.findViewById(R.id.tvNewGoodsPrice);
+        }
+    }
+    static class FootsViewHolder extends RecyclerView.ViewHolder{
+        TextView tvFoot;
+        public FootsViewHolder(View itemView) {
+            super(itemView);
+            tvFoot= (TextView) itemView.findViewById(R.id.tvFoot);
         }
     }
 }
