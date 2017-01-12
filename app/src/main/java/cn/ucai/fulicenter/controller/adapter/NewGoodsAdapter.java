@@ -14,6 +14,7 @@ import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.model.bean.NewGoodsBean;
 import cn.ucai.fulicenter.model.util.ImageLoader;
+import cn.ucai.fulicenter.view.MFGT;
 
 
 /**
@@ -84,7 +85,7 @@ public class NewGoodsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (getItemViewType(position)==I.TYPE_FOOTER){
             FootsViewHolder viewHolder=(FootsViewHolder)holder;
             viewHolder.tvFoot.setText(getFoot());
@@ -94,6 +95,12 @@ public class NewGoodsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         viewHolder.mTvNewGoodsPrice.setText(list.get(position).getPromotePrice());
         viewHolder.mTvNewGoodsName.setText(list.get(position).getGoodsName());
         ImageLoader.downloadImg(context,viewHolder.mIvNewGoods,list.get(position).getGoodsThumb());
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MFGT.gotoGoodsDetail(context,list.get(position).getGoodsId());
+            }
+        });
     }
 
     @Override
