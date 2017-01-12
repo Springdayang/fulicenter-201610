@@ -1,6 +1,7 @@
 package cn.ucai.fulicenter.controller.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.application.I;
+import cn.ucai.fulicenter.controller.activity.BoutiqueChildActivity;
 import cn.ucai.fulicenter.model.bean.BoutiqueBean;
 import cn.ucai.fulicenter.model.util.ImageLoader;
 
@@ -79,19 +82,28 @@ public class BoutiqueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         BoutiqueViewHolder viewholder = (BoutiqueViewHolder) holder;
+        ImageLoader.downloadImg(context, viewholder.ivBoutique, boutiqueBeanArrayList.get(position).getImageurl());
         viewholder.tvBoutitqueName.setText(boutiqueBeanArrayList.get(position).getName());
         viewholder.tvBoutiqueTitle.setText(boutiqueBeanArrayList.get(position).getTitle());
         viewholder.tvBoutiqueDescription.setText(boutiqueBeanArrayList.get(position).getDescription());
-        ImageLoader.downloadImg(context, viewholder.ivBoutique, boutiqueBeanArrayList.get(position).getImageurl());
+        viewholder.itemView.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context,BoutiqueChildActivity.class);
+                intent.putExtra(I.NewAndBoutiqueGoods.CAT_ID,boutiqueBeanArrayList.get(position).getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return boutiqueBeanArrayList.size();
     }
-    
+
     static class BoutiqueViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.ivBoutique)
         ImageView ivBoutique;

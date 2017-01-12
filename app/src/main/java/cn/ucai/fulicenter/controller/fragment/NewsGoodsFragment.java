@@ -86,7 +86,8 @@ public class NewsGoodsFragment extends Fragment {
     }
 
     private void downLoadData(final int action, int pageId) {
-        modelNewGoods.downData(getContext(), I.CAT_ID, pageId, new OkHttpUtils.OnCompleteListener<NewGoodsBean[]>() {
+        int catId=getActivity().getIntent().getIntExtra(I.NewAndBoutiqueGoods.CAT_ID,I.CAT_ID);
+        modelNewGoods.downData(getContext(), catId, pageId, new OkHttpUtils.OnCompleteListener<NewGoodsBean[]>() {
             @Override
             public void onSuccess(NewGoodsBean[] result) {
                 adapter.setMore(result != null && result.length > 0);
