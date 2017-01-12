@@ -1,12 +1,12 @@
 package cn.ucai.fulicenter.controller.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,10 +14,9 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.application.I;
-import cn.ucai.fulicenter.controller.activity.BoutiqueChildActivity;
 import cn.ucai.fulicenter.model.bean.BoutiqueBean;
 import cn.ucai.fulicenter.model.util.ImageLoader;
+import cn.ucai.fulicenter.view.MFGT;
 
 /**
  * Created by Administrator on 2017/1/12 0012.
@@ -26,11 +25,13 @@ import cn.ucai.fulicenter.model.util.ImageLoader;
 public class BoutiqueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     ArrayList<BoutiqueBean> boutiqueBeanArrayList;
-    Context context;
+   static Context context;
     LayoutInflater inflater;
     String foot;
     boolean isMore;
     boolean isDrag;
+
+
 
     public String getFoot() {
         return foot;
@@ -62,16 +63,19 @@ public class BoutiqueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.boutiqueBeanArrayList = boutiqueBeanArrayList;
         inflater = LayoutInflater.from(context);
     }
-    public void initData(ArrayList<BoutiqueBean>list){
-        if(boutiqueBeanArrayList!=null){
+
+    public void initData(ArrayList<BoutiqueBean> list) {
+        if (boutiqueBeanArrayList != null) {
             boutiqueBeanArrayList.clear();
         }
         addData(list);
     }
-    public void addData(ArrayList<BoutiqueBean>list){
-       boutiqueBeanArrayList.addAll(list);
+
+    public void addData(ArrayList<BoutiqueBean> list) {
+        boutiqueBeanArrayList.addAll(list);
         notifyDataSetChanged();
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder = null;
@@ -88,13 +92,11 @@ public class BoutiqueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         viewholder.tvBoutitqueName.setText(boutiqueBeanArrayList.get(position).getName());
         viewholder.tvBoutiqueTitle.setText(boutiqueBeanArrayList.get(position).getTitle());
         viewholder.tvBoutiqueDescription.setText(boutiqueBeanArrayList.get(position).getDescription());
-        viewholder.itemView.setOnClickListener(new View.OnClickListener(){
+        viewholder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context,BoutiqueChildActivity.class);
-                intent.putExtra(I.NewAndBoutiqueGoods.CAT_ID,boutiqueBeanArrayList.get(position).getId());
-                context.startActivity(intent);
+                MFGT.gotoBoutiqueChild(context,boutiqueBeanArrayList.get(position));
             }
         });
     }
@@ -113,10 +115,16 @@ public class BoutiqueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView tvBoutitqueName;
         @BindView(R.id.tvBoutiqueDescription)
         TextView tvBoutiqueDescription;
+        @BindView(R.id.rela_recycler)
+        RelativeLayout relaRecycler;
 
         public BoutiqueViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
+//        @OnClick(R.id.rela_recycler)
+//        public void onClick(){
+//
+//        }
     }
 }

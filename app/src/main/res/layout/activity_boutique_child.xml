@@ -6,35 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="cn.ucai.fulicenter.controller.activity.BoutiqueChildActivity">
+
+    <include
+       android:id="@+id/linear_title"
+       layout="@layout/common_head_title"/>
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="1dp"
         android:layout_below="@+id/linear_title"
         />
-    <LinearLayout
-        android:id="@+id/linear_title"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:background="@color/good_detail_title_bg"
-        >
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/back"
-            />
-        <TextView
-            android:id="@+id/tvBoutiqueTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="商品详情"
-            android:textSize="20sp"
-            android:textColor="@color/text_color_hint"
-            android:layout_gravity="center"
-            />
-
-    </LinearLayout>
 </RelativeLayout>

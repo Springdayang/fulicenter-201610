@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.view.MGTF;
+import cn.ucai.fulicenter.view.MFGT;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -16,8 +16,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                MGTF.startActivity(SplashActivity.this,MainActivity.class);
-                MGTF.finishActivity(SplashActivity.this);
+                MFGT.startActivity(SplashActivity.this,MainActivity.class);
+                MFGT.finishActivity(SplashActivity.this);
             }
         },2000);
     }
