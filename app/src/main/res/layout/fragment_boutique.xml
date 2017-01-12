@@ -22,4 +22,12 @@
                     />
             </LinearLayout>
         </android.support.v4.widget.SwipeRefreshLayout>
+    <TextView
+        android:id="@+id/tv_nomore"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:text="@string/load_more"
+        android:gravity="center"
+        />
 </LinearLayout>

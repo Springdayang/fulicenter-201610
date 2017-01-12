@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.model.bean.NewGoodsBean;
 import cn.ucai.fulicenter.model.util.ImageLoader;
 
@@ -25,8 +26,6 @@ public class NewGoodsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     String foot;
     boolean isMore;
     boolean isDrag;
-    static  final int TYPE_ITEM=1;
-    static final int TYPE_FOOT=0;
 
     public String getFoot() {
         return foot;
@@ -72,11 +71,11 @@ public class NewGoodsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder=null;
         switch (viewType){
-            case TYPE_ITEM:
+            case I.TYPE_ITEM:
                 View view=inflater.inflate(R.layout.new_goods_item,null);
                 viewHolder=new GoodsViewHolder(view);
                 break;
-            case TYPE_FOOT:
+            case I.TYPE_FOOTER:
                 View view1=inflater.inflate(R.layout.foot_item,null);
                 viewHolder=new FootsViewHolder(view1);
                 break;
@@ -86,7 +85,7 @@ public class NewGoodsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (getItemViewType(position)==TYPE_FOOT){
+        if (getItemViewType(position)==I.TYPE_FOOTER){
             FootsViewHolder viewHolder=(FootsViewHolder)holder;
             viewHolder.tvFoot.setText(getFoot());
             return ;
@@ -105,9 +104,9 @@ public class NewGoodsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemViewType(int position) {
         if(position==getItemCount()-1){
-            return TYPE_FOOT;
+            return I.TYPE_FOOTER;
         }
-        return TYPE_ITEM;
+        return I.TYPE_ITEM;
     }
 
     static class GoodsViewHolder extends RecyclerView.ViewHolder{
