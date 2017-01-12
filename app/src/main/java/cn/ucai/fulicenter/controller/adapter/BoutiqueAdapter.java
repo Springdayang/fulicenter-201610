@@ -54,12 +54,21 @@ public class BoutiqueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         isDrag = drag;
     }
 
-    BoutiqueAdapter(Context context, ArrayList<BoutiqueBean> boutiqueBeanArrayList) {
+    public BoutiqueAdapter(Context context, ArrayList<BoutiqueBean> boutiqueBeanArrayList) {
         this.context = context;
         this.boutiqueBeanArrayList = boutiqueBeanArrayList;
         inflater = LayoutInflater.from(context);
     }
-
+    public void initData(ArrayList<BoutiqueBean>list){
+        if(boutiqueBeanArrayList!=null){
+            boutiqueBeanArrayList.clear();
+        }
+        addData(list);
+    }
+    public void addData(ArrayList<BoutiqueBean>list){
+       boutiqueBeanArrayList.addAll(list);
+        notifyDataSetChanged();
+    }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder = null;

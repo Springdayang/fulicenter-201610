@@ -97,7 +97,6 @@ public class NewsGoodsFragment extends Fragment {
                     return;
                 }
                 adapter.setFoot("加载更多数据");
-                if (result != null && result.length > 0) {
                     ArrayList<NewGoodsBean> list = ConvertUtils.array2List(result);
                     switch (action) {
                         case ACTION_DOWNLOAD:
@@ -112,7 +111,6 @@ public class NewsGoodsFragment extends Fragment {
                             adapter.addData(list);
                             break;
                     }
-                }
             }
 
             @Override
@@ -125,15 +123,15 @@ public class NewsGoodsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news_goods, container, false);
+        ButterKnife.bind(this, view);
         modelNewGoods = new ModelNewGoods();
-        initView(view);
+        initView();
         downLoadData(ACTION_DOWNLOAD, pageId);
         setListener();
-        ButterKnife.bind(this, view);
         return view;
     }
 
-    private void initView(View view) {
+    private void initView() {
         srl.setColorSchemeColors(
                 getResources().getColor(R.color.google_green),
                 getResources().getColor(R.color.google_red),
