@@ -11,7 +11,7 @@ import cn.ucai.fulicenter.model.util.OkHttpUtils;
  * Created by Administrator on 2017/1/13 0013.
  */
 
-public class ModleCategory implements IModelNewCategory {
+public class ModelCategory implements IModelNewCategory {
     @Override
     public void downData(Context context, OnCompleteListener<CategoryGroupBean[]> listener) {
         OkHttpUtils<CategoryGroupBean[]> utils=new OkHttpUtils<>(context);

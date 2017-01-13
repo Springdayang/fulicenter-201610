@@ -13,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.controller.fragment.BoutiqueFragment;
+import cn.ucai.fulicenter.controller.fragment.CategoryFragment;
 import cn.ucai.fulicenter.controller.fragment.NewsGoodsFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     //Fragment
     NewsGoodsFragment mNewGoodsFragment;
     BoutiqueFragment mBoutiqueFragment;
+    CategoryFragment mCategoryFragment;
     Fragment mFragment[]=new Fragment[5];
 
     @Override
@@ -50,15 +52,19 @@ public class MainActivity extends AppCompatActivity {
     private void addFragment() {
         mNewGoodsFragment=new NewsGoodsFragment();
         mBoutiqueFragment=new BoutiqueFragment();
+        mCategoryFragment=new CategoryFragment();
         mFragment[0]=mNewGoodsFragment;
         mFragment[1]=mBoutiqueFragment;
+        mFragment[2]=mCategoryFragment;
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment, mNewGoodsFragment);
         fragmentTransaction.add(R.id.fragment,mBoutiqueFragment);
+        fragmentTransaction.add(R.id.fragment,mCategoryFragment);
         fragmentTransaction.show(mNewGoodsFragment);
         fragmentTransaction.hide(mBoutiqueFragment);
+        fragmentTransaction.hide(mCategoryFragment);
         fragmentTransaction.commit();
     }
 
@@ -69,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
         rbCart = (RadioButton) findViewById(R.id.rbCart);
         rbPerson = (RadioButton) findViewById(R.id.rbPerson);
         radioButton[0] = rbNewGoods;
-        radioButton[1] = rbCategory;
-        radioButton[2] = rbBoutique;
+        radioButton[1] = rbBoutique;
+        radioButton[2] = rbCategory;
         radioButton[3] = rbCart;
         radioButton[4] = rbPerson;
         radioButton[0].setChecked(true);
