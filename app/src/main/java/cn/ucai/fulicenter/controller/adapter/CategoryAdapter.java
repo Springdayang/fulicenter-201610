@@ -1,7 +1,6 @@
 package cn.ucai.fulicenter.controller.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.model.bean.CategoryChildBean;
 import cn.ucai.fulicenter.model.bean.CategoryGroupBean;
 import cn.ucai.fulicenter.model.util.ImageLoader;
+import cn.ucai.fulicenter.view.MFGT;
 
 /**
  * Created by Administrator on 2017/1/13 0013.
@@ -45,20 +45,18 @@ public class CategoryAdapter extends BaseExpandableListAdapter {
         }
         mGroupBean.addAll(groupBeanlist);
         mChildBean.addAll(childBeanlist);
-        Log.i("dayang","更新数据源"+"--------------");
-        Log.i("dayang", "mChildBean----"+mChildBean.get(0).get(7).toString()+"------------");
-        Log.i("dayang","mGroupBean----"+mGroupBean.size()+"------------");
         notifyDataSetChanged();
     }
 
     @Override
     public int getGroupCount() {
-        return mGroupBean.size();
+        return mGroupBean!=null?mGroupBean.size():0;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return mChildBean.get(groupPosition).size();
+
+        return mChildBean!=null&&mChildBean.get(groupPosition)!=null?mChildBean.get(groupPosition).size():0;
     }
 
     @Override
@@ -103,7 +101,7 @@ public class CategoryAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         ChildViewHolder childViewHolder=null;
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.children_category_item, null);
@@ -114,7 +112,14 @@ public class CategoryAdapter extends BaseExpandableListAdapter {
         }
         ImageLoader.downloadImg(context,childViewHolder.ivChildImage,mChildBean.get(groupPosition).get(childPosition).getImageUrl());
         childViewHolder.tvChildrenGoodsName.setText(mChildBean.get(groupPosition).get(childPosition).getName());
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MFGT.gotoCategoryGoodsDetail(context,mChildBean.get(groupPosition).get(childPosition).getId());
+            }
+        });
         return convertView;
+
     }
 
     @Override
@@ -145,4 +150,5 @@ public class CategoryAdapter extends BaseExpandableListAdapter {
             ButterKnife.bind(this, view);
         }
     }
+
 }

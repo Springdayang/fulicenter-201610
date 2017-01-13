@@ -12,7 +12,7 @@ import cn.ucai.fulicenter.model.util.OkHttpUtils;
 
 public class ModelGoods implements IModelGoods {
     @Override
-    public void downData(Context context,int goodsId,OkHttpUtils.OnCompleteListener<GoodsDetailsBean> listener) {
+    public void downData(Context context, int goodsId, OnCompleteListener<GoodsDetailsBean> listener) {
         OkHttpUtils<GoodsDetailsBean>utils=new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_FIND_GOOD_DETAILS)
                 .addParam(I.Goods.KEY_GOODS_ID,String.valueOf(goodsId))

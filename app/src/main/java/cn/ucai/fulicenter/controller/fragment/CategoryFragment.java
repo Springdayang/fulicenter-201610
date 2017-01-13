@@ -55,13 +55,12 @@ public class CategoryFragment extends Fragment {
     }
     private void initData(){
         modelNewCategory=new ModelCategory();
-        modelNewCategory.downData(getContext(), new OnCompleteListener<CategoryGroupBean[]>() {
+        modelNewCategory.downData(getContext(),new OnCompleteListener<CategoryGroupBean[]>() {
             @Override
             public void onSuccess(CategoryGroupBean[] result) {
                 for (int i=0;i<result.length;i++){
                     Log.i("dayang","-------"+"result"+result[i].toString()+"--------------");
                 }
-
                 if(result!=null&&result.length>0){
                     initView(true);
                     groupList= ConvertUtils.array2List(result);
@@ -91,12 +90,11 @@ public class CategoryFragment extends Fragment {
                 }
                 if(groupCount==groupList.size()){
                     adapter.initData(groupList,childList);
-                    groupCount=0;
                 }
             }
             @Override
             public void onError(String error) {
-
+                Log.i("dayang","--------------error="+error);
             }
         });
     }

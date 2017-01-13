@@ -23,6 +23,10 @@ public interface I {
     int REQUEST_CODE_NICK = 103;
     int REQUEST_CODE_LOGIN_FROM_CART = 104;
 
+    //新品时为0，其他的调用这个接口为1
+    int GOODS_LIST_TYPE_NEW=0;
+    int GOODS_LIST_TYPE_CHILD=1;
+
     /** BeeColud APP ID */
     String BEE_COLUD_APP_ID = "3539b590-4859-4128-87a3-5fb8b86b94f6";
     /** BeeColud APP Secret*/

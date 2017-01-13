@@ -8,6 +8,7 @@
         android:id="@+id/elv_category"
         android:background="@color/list_background"
         android:dividerHeight="8dp"
+        android:groupIndicator="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />

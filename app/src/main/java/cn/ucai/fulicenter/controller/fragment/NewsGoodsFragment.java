@@ -153,4 +153,7 @@ public class NewsGoodsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+    public void sortGoods(int sortBy){
+        adapter.sortGoods(sortBy);
+    }
 }
