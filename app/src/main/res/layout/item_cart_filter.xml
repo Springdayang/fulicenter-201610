@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rela_list"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+       android:id="@+id/tvCategoryChildName"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_toRightOf="@+id/ivGoodView"
+       android:layout_marginLeft="5dp"
+       android:layout_centerVertical="true"
+       android:text="鞋子"
+        android:gravity="center_vertical"
+       android:textColor="@color/black"
+       android:textSize="12sp"
+       />
+    <ImageView
+        android:id="@+id/ivGoodView"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/category_child"
+        />
+    <ImageView
+        android:id="@+id/ivImageView"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="3dp"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/divide_line_bg"
+        />
+</RelativeLayout>

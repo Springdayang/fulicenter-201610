@@ -104,7 +104,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserModel{" +
                 "muserName='" + muserName + '\'' +
                 ", muserNick='" + muserNick + '\'' +
                 ", mavatarId=" + mavatarId +

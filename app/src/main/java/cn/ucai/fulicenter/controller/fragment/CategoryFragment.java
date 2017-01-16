@@ -102,6 +102,7 @@ public class CategoryFragment extends Fragment {
     private void initView(boolean hasData){
         elvCategory.setVisibility(hasData?View.VISIBLE:View.GONE);
         elvCategory.setAdapter(adapter);
+        elvCategory.setGroupIndicator(null);
         tvNomore.setVisibility(hasData?View.GONE:View.VISIBLE);
     }
 
