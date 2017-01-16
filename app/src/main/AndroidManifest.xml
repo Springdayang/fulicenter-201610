@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".controller.activity.MainActivity" />
-        <activity android:name=".controller.activity.SplashActivity">
+        <activity android:name=".controller.activity.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +23,7 @@
         <activity android:name=".controller.activity.BoutiqueChildActivity" />
         <activity android:name=".controller.activity.CategoryListActivity" />
         <activity android:name=".controller.activity.LoginActivity" />
-        <activity android:name=".controller.activity.RegisterActivity"></activity>
+        <!--<activity android:name=".controller.activity.RegisterActivity"></activity>-->
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.controller.fragment.NewsGoodsFragment;
 import cn.ucai.fulicenter.model.bean.CategoryChildBean;
 import cn.ucai.fulicenter.view.CatFilterButton;
+import cn.ucai.fulicenter.view.MFGT;
 
 /**
  * 分类列表
@@ -30,6 +32,8 @@ public class CategoryListActivity extends AppCompatActivity {
     boolean priceAsc = false;
     @BindView(R.id.btnCatFilterButton)
     CatFilterButton btnCatFilterButton;
+    @BindView(R.id.arrow)
+    ImageView arrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +46,7 @@ public class CategoryListActivity extends AppCompatActivity {
                 .commit();
         String groupName = getIntent().getStringExtra(I.CategoryGroup.NAME);
         ArrayList<CategoryChildBean> list = (ArrayList<CategoryChildBean>) getIntent().getSerializableExtra(I.CategoryChild.DATA);
-        btnCatFilterButton.initCatFileterButton(groupName,list);
+        btnCatFilterButton.initCatFileterButton(groupName, list);
     }
 
     @OnClick({R.id.btn_sort_price, R.id.btn_sort_addtime})
@@ -76,5 +80,10 @@ public class CategoryListActivity extends AppCompatActivity {
                 break;
         }
         mNewGoodsFragment.sortGoods(sortBy);
+    }
+
+    @OnClick(R.id.arrow)
+    public void onClick() {
+        MFGT.finishActivity(this);
     }
 }
