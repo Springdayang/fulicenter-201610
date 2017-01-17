@@ -3,8 +3,9 @@
     package="cn.ucai.fulicenter">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".application.FuLiCenterApplication"
         android:allowBackup="true"
@@ -16,6 +17,7 @@
         <activity android:name=".controller.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,7 +25,8 @@
         <activity android:name=".controller.activity.BoutiqueChildActivity" />
         <activity android:name=".controller.activity.CategoryListActivity" />
         <activity android:name=".controller.activity.LoginActivity" />
-        <activity android:name=".controller.activity.RegisterActivity"></activity>
+        <activity android:name=".controller.activity.RegisterActivity" />
+        <activity android:name=".controller.activity.SettingActivity"></activity>
     </application>
 
 </manifest>

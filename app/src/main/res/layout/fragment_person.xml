@@ -301,6 +301,34 @@
                 android:background="@drawable/right_arrow_icon"
                 />
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:id="@+id/tvShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="我的专享特权"
+                />
+            <TextView
+                android:id="@+id/tvShareText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/ivArrow4"
+                android:text="领金币，看优惠"
+                />
+            <ImageView
+                android:id="@+id/ivArrow4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/right_arrow_icon"
+                />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
