@@ -19,6 +19,7 @@ import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.model.bean.Result;
 import cn.ucai.fulicenter.model.bean.User;
+import cn.ucai.fulicenter.model.dao.UserDao;
 import cn.ucai.fulicenter.model.net.IModeUser;
 import cn.ucai.fulicenter.model.net.OnCompleteListener;
 import cn.ucai.fulicenter.model.net.UserModel;
@@ -93,8 +94,12 @@ public class LoginActivity extends AppCompatActivity {
                     if(result!=null){
                         if(result.isRetMsg()){
                             User user= (User) result.getRetData();
-                            SharePreferenceUtils.getInstance(LoginActivity.this).saveUser(user.getMuserName());
-                            MFGT.finishActivity(LoginActivity.this);
+                            boolean savaUser= UserDao.getInstance().savaUser(user);
+                            Log.i("dayang","savaUser="+savaUser);
+                            if(savaUser){
+                                SharePreferenceUtils.getInstance(LoginActivity.this).saveUser(user.getMuserName());
+                                MFGT.finishActivity(LoginActivity.this);
+                            }
                         }else{
                             if(result.getRetCode()== I.MSG_LOGIN_UNKNOW_USER){
                                 CommonUtils.showLongToast(getString(R.string.login_fail_unknow_user));

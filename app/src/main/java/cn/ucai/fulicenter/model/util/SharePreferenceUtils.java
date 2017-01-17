@@ -23,11 +23,11 @@ public class SharePreferenceUtils {
         }
         return instance;
     }
-    public static  void saveUser(String username){
+    public  void saveUser(String username){
         mEditor.putString(SHARE_PREFERNCE_NAME_USERNAME,username);
         mEditor.commit();
     }
-    public static String getUser(){
+    public String getUser(){
         return preferences.getString(SHARE_PREFERNCE_NAME_USERNAME,null);
     }
     public void removeUser(){

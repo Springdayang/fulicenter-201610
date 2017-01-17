@@ -90,6 +90,7 @@
                 android:id="@+id/tvCollectCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@color/bg_gray_light"
                 android:text="0"
                 />
@@ -97,10 +98,17 @@
                 android:id="@+id/tvCollectGoods"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@color/bg_gray_light"
                 android:text="收藏的宝贝"
                 />
             </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:background="@color/white"
+                />
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -111,6 +119,7 @@
                     android:id="@+id/tvBusinessCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:text="0"
                     android:textColor="@color/bg_gray_light"
                     />
@@ -118,13 +127,180 @@
                     android:id="@+id/tvBusinessGoods"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:text="收藏的宝贝"
                     android:textColor="@color/bg_gray_light"
                     />
                 </LinearLayout>
-            <LinearLayout>
-                </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:background="@color/white"
+                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/tvMyFootCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/bg_gray_light"
+                    />
+                <TextView
+                    android:id="@+id/tvMyFoot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="我的足迹"
+                    android:textColor="@color/bg_gray_light"
+                    />
             </LinearLayout>
+            </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/fragment_bg"
+            >
+            <TextView
+                android:id="@+id/MyCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="我的订单"
+                android:textColor="@color/black"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:id="@+id/tvBuyCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="查看全部已购宝贝"
+                android:layout_alignParentRight="true"
+                android:drawableRight="@drawable/right_arrow_icon"
+                android:textColor="@color/btn_gray_pressed"
+                android:layout_centerVertical="true"
+                />
+            </RelativeLayout>
+        <GridView
+            android:id="@+id/center_gridView_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:cacheColorHint="#000000"
+            android:background="@color/white"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:numColumns="5"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/fragment_bg"
+            >
+        <TextView
+            android:id="@+id/myCardView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:text="我的卡卷包"
+            android:drawableRight="@drawable/right_arrow_icon"
+            android:textColor="@color/black"
+            />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/fragment_bg"
+            >
+            <TextView
+                android:id="@+id/myLife"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:text="生活卷"
+                android:drawableRight="@drawable/right_arrow_icon"
+                android:drawableLeft="@drawable/center_card_coupon1"
+                android:textColor="@color/black"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/fragment_bg"
+            >
+            <TextView
+                android:id="@+id/myInternetBusiness"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:text="网店卷"
+                android:drawableLeft="@drawable/center_card_coupon2"
+                android:textColor="@color/black"
+                />
+            <!--<TextView-->
+                <!--android:id="@+id/tvTitle"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="暂无可用优惠券"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:layout_toLeftOf="@+id/myivImageView"-->
+                <!--/>-->
+            <ImageView
+                android:id="@+id/myivImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/right_arrow_icon"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/fragment_bg"
+            >
+            <TextView
+                android:id="@+id/myCard"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:text="会员卡"
+                android:drawableRight="@drawable/right_arrow_icon"
+                android:drawableLeft="@drawable/center_card_coupon3"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/tvCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="一卡在手，逛店无忧"
+                android:textColor="@color/black"
+                android:layout_toLeftOf="@+id/rightCard"
+                />
+            <ImageView
+                android:id="@+id/rightCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/right_arrow_icon"
+                />
+        </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

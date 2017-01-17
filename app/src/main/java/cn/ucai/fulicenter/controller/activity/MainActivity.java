@@ -19,6 +19,8 @@ import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.controller.fragment.BoutiqueFragment;
 import cn.ucai.fulicenter.controller.fragment.CategoryFragment;
 import cn.ucai.fulicenter.controller.fragment.NewsGoodsFragment;
+import cn.ucai.fulicenter.controller.fragment.PersonFragment;
+import cn.ucai.fulicenter.view.MFGT;
 
 public class MainActivity extends AppCompatActivity {
     int index, currentIndex;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     NewsGoodsFragment mNewGoodsFragment;
     BoutiqueFragment mBoutiqueFragment;
     CategoryFragment mCategoryFragment;
+    PersonFragment mPersonFragment;
     Fragment mFragment[]=new Fragment[5];
 
     @Override
@@ -57,18 +60,22 @@ public class MainActivity extends AppCompatActivity {
         mNewGoodsFragment=new NewsGoodsFragment();
         mBoutiqueFragment=new BoutiqueFragment();
         mCategoryFragment=new CategoryFragment();
+        mPersonFragment=new PersonFragment();
         mFragment[0]=mNewGoodsFragment;
         mFragment[1]=mBoutiqueFragment;
         mFragment[2]=mCategoryFragment;
+        mFragment[4]=mPersonFragment;
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment, mNewGoodsFragment);
         fragmentTransaction.add(R.id.fragment,mBoutiqueFragment);
         fragmentTransaction.add(R.id.fragment,mCategoryFragment);
+        fragmentTransaction.add(R.id.fragment,mPersonFragment);
         fragmentTransaction.show(mNewGoodsFragment);
         fragmentTransaction.hide(mBoutiqueFragment);
         fragmentTransaction.hide(mCategoryFragment);
+        fragmentTransaction.hide(mPersonFragment);
         fragmentTransaction.commit();
     }
 
@@ -104,7 +111,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.rbCart:
                 index = 3;
             case R.id.rbPerson:
-                index = 4;
+                if (FuLiCenterApplication.getUser()==null){
+                    MFGT.gotoLogin(this);
+                }else{
+                    index=4;
+                }
                 break;
         }
         setFragment();

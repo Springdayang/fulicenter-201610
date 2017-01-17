@@ -2,6 +2,7 @@ package cn.ucai.fulicenter.model.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -24,7 +25,7 @@ public class DBManager {
         dbOpenHelper=new DBOpenHelper(context);
     }
 
-    public void savaUser(User user){
+    public boolean savaUser(User user){
         SQLiteDatabase db=dbOpenHelper.getWritableDatabase();
         if (db.isOpen()){
             ContentValues values=new ContentValues();
@@ -35,8 +36,9 @@ public class DBManager {
             values.put(UserDao.USER_COLUME_AVATAR_TYPE,user.getMavatarType());
             values.put(UserDao.USER_COLUME_AVATAR_SUFFIX,user.getMavatarSuffix());
             values.put(UserDao.USER_COLUME_AVATAR_UPDATE_TIME,user.getMavatarLastUpdateTime());
-            db.replace(UserDao.USER_TABLE_NAME,null,values);
+           return  db.replace(UserDao.USER_TABLE_NAME,null,values)!=-1;
         }
+        return false;
     }
     private void closeDB(){
         if(instance!=null){
@@ -50,5 +52,26 @@ public class DBManager {
             Log.i("dayang","没有调用onInit()");
         }
         return dbMgr;
+    }
+
+    public User getUser(String username) {
+        SQLiteDatabase db=dbOpenHelper.getReadableDatabase();
+        String sql="SELECT * FROM "+UserDao.USER_TABLE_NAME+
+                "where "+UserDao.USER_COLUME_NAME+" =?";
+        if(db.isOpen()){
+            Cursor cursor=db.rawQuery(sql,new String[]{username});
+            if(cursor.moveToNext()){
+                User user=new User();
+                user.setMuserName(username);
+                user.setMuserNick(cursor.getString(cursor.getColumnIndex(UserDao.USER_COLUME_NICK)));
+                user.setMavatarId(cursor.getInt(cursor.getColumnIndex(UserDao.USER_COLUME_AVATAR)));
+                user.setMavatarPath(cursor.getString(cursor.getColumnIndex(UserDao.USER_COLUME_AVATAR_PATH)));
+                user.setMavatarType(cursor.getInt(cursor.getColumnIndex(UserDao.USER_COLUME_AVATAR_TYPE)));
+                user.setMavatarSuffix(cursor.getString(cursor.getColumnIndex(UserDao.USER_COLUME_AVATAR_SUFFIX)));
+                user.setMavatarLastUpdateTime(cursor.getString(cursor.getColumnIndex(UserDao.USER_COLUME_AVATAR_UPDATE_TIME)));
+                return user;
+            }
+        }
+            return null;
     }
 }

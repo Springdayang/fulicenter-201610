@@ -18,7 +18,7 @@ public class FuLiCenterApplication extends Application {
         super.onCreate();
         instance=this;
     }
-    public static User getUser(){
+    public static  User getUser(){
             return new User();
     }
     public static void setUser(User user){

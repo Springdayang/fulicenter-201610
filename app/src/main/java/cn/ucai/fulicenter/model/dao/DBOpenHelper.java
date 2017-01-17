@@ -43,4 +43,11 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+    private void closeDB(){
+        if(instance!=null){
+            SQLiteDatabase db=instance.getWritableDatabase();
+            db.close();
+            instance=null;
+        }
+    }
 }
