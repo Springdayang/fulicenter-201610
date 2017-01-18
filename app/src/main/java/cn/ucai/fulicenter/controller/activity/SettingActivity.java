@@ -23,6 +23,7 @@ import cn.ucai.fulicenter.model.bean.Result;
 import cn.ucai.fulicenter.model.bean.User;
 import cn.ucai.fulicenter.model.net.IModeUser;
 import cn.ucai.fulicenter.model.net.OnCompleteListener;
+import cn.ucai.fulicenter.model.net.UserModel;
 import cn.ucai.fulicenter.model.util.CommonUtils;
 import cn.ucai.fulicenter.model.util.ImageLoader;
 import cn.ucai.fulicenter.model.util.OnSetAvatarListener;
@@ -123,12 +124,14 @@ public class SettingActivity extends AppCompatActivity {
         } else if (requestCode == OnSetAvatarListener.REQUEST_CROP_PHOTO) {
             uploadAvatar();
         } else {
-//            OnSetAvatarListener.setAvatar(requestCode,data,ivUserAvatar);
+            mOnSetAvatarListener.setAvatar(requestCode,data,ivUserAvatar);
         }
+        mOnSetAvatarListener.setAvatar(requestCode,data,ivUserAvatar);
     }
 
     private void uploadAvatar() {
         User user = getUser();
+        model=new UserModel();
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setMessage(getString(R.string.update_user_avatar));
         dialog.show();
@@ -154,7 +157,6 @@ public class SettingActivity extends AppCompatActivity {
                         CommonUtils.showLongToast(msg);
                         dialog.dismiss();
                     }
-
                     @Override
                     public void onError(String error) {
                         CommonUtils.showLongToast(error);

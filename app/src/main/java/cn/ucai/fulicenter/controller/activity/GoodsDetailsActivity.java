@@ -139,10 +139,12 @@ public class GoodsDetailsActivity extends AppCompatActivity {
                     }else{
                         isCollect=false;
                     }
+                    setCollectStatus();
                 }
                 @Override
                 public void onError(String error) {
                         isCollect=false;
+                    setCollectStatus();
                 }
             });
         }
