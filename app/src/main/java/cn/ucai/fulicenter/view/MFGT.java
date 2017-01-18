@@ -65,4 +65,7 @@ public class MFGT {
     public static void gotoSettings(FragmentActivity activity){
         startActivity(activity, SettingActivity.class);
     }
+    public static void gotoUpDataNick(Activity activity){
+
+    }
 }

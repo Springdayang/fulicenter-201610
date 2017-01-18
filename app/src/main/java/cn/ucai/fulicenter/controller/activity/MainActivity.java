@@ -141,6 +141,10 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.i("dayang","onResume,currentIndex="+currentIndex+",index="+
                 index+",user= "+ FuLiCenterApplication.getUser());
+        if(index==4&&FuLiCenterApplication.getUser()==null){
+            index=0;
+        }
+        setFragment();
         setRadioState();
     }
 
