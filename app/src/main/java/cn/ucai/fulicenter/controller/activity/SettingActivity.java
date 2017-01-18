@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,6 +28,7 @@ import cn.ucai.fulicenter.model.util.ImageLoader;
 import cn.ucai.fulicenter.model.util.OnSetAvatarListener;
 import cn.ucai.fulicenter.model.util.ResultUtils;
 import cn.ucai.fulicenter.model.util.SharePreferenceUtils;
+import cn.ucai.fulicenter.view.DisplayUtils;
 import cn.ucai.fulicenter.view.MFGT;
 
 import static cn.ucai.fulicenter.application.FuLiCenterApplication.getUser;
@@ -63,6 +65,7 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
+        DisplayUtils.initBackWithTitle(this,"设置");
         initData();
     }
 
@@ -91,13 +94,11 @@ public class SettingActivity extends AppCompatActivity {
 
     @OnClick(R.id.tvNickRelative)
     public void updateNick() {
-        MFGT.gotoUpDataNick(this);
-//        String nick = tvNick.getText().toString().trim();
-//        if (TextUtils.isEmpty(nick)) {
-//
-//        } else {
-//
-//        }
+        String nick=tvNick.getText().toString().trim();
+        if(TextUtils.isEmpty(nick)){
+            MFGT.gotoUpDataNick(this);
+        }
+
     }
 
     @OnClick(R.id.tvUserRelative)

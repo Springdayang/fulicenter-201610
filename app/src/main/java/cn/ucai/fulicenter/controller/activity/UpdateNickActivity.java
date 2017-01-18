@@ -61,15 +61,18 @@ public class UpdateNickActivity extends AppCompatActivity {
                 MFGT.finishActivity(this);
                 break;
             case R.id.savaNickName:
-                String nick=etNickName.getText().toString().trim();
-                if(TextUtils.isEmpty(nick)){
-                    CommonUtils.showLongToast(R.string.nick_name_connot_be_empty);
-                }else if(nick.equals(user.getMuserNick())) {
-                    CommonUtils.showLongToast(R.string.update_nick_fail_unmodify);
-                }else{
-                    updateNick(nick);
-                }
+                chekInput();
                 break;
+        }
+    }
+    public void chekInput(){
+        String nick=etNickName.getText().toString().trim();
+        if(TextUtils.isEmpty(nick)){
+            CommonUtils.showLongToast(R.string.nick_name_connot_be_empty);
+        }else if(nick.equals(user.getMuserNick())) {
+            CommonUtils.showLongToast(R.string.update_nick_fail_unmodify);
+        }else{
+            updateNick(nick);
         }
     }
     private void updateNick(String nick){
@@ -86,6 +89,8 @@ public class UpdateNickActivity extends AppCompatActivity {
                     if(result1!=null){
                         if(result1.isRetMsg()){
                             msg=R.string.update_user_nick_success;
+                            User user= (User) result1.getRetData();
+                            Log.i("dayang","onSuccess : user="+user);
                             saveNewUser(user);
                             setResult(RESULT_OK);
                             finish();
