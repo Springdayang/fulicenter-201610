@@ -16,7 +16,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.FuLiCenterApplication;
+import cn.ucai.fulicenter.model.bean.MessageBean;
 import cn.ucai.fulicenter.model.bean.User;
+import cn.ucai.fulicenter.model.net.IModeUser;
+import cn.ucai.fulicenter.model.net.OnCompleteListener;
+import cn.ucai.fulicenter.model.net.UserModel;
 import cn.ucai.fulicenter.model.util.ImageLoader;
 import cn.ucai.fulicenter.model.util.SharePreferenceUtils;
 import cn.ucai.fulicenter.view.MFGT;
@@ -36,6 +40,9 @@ public class PersonFragment extends Fragment {
     RelativeLayout centerTop;
     @BindView(R.id.ivPerson)
     ImageView ivPerson;
+    IModeUser mIModel;
+    @BindView(R.id.tvCollectCount)
+    TextView tvCollectCount;
 
     public PersonFragment() {
         // Required empty public constructor
@@ -53,25 +60,50 @@ public class PersonFragment extends Fragment {
     private void initData() {
         User user = FuLiCenterApplication.getUser();
         if (user != null) {
-            Log.i("dayang","=========="+user.toString()+"=========");
+            Log.i("dayang", "==========" + user.toString() + "=========");
             loadUserInfo(user);
+            getCollectCount();
         } else {
             MFGT.gotoLogin(getActivity());
+            Log.i("dayang", "initData :null user");//检测空用户登录后退跳转
         }
     }
-
+    private void getCollectCount() {
+        mIModel = new UserModel();
+        mIModel.collectCount(getContext(), FuLiCenterApplication.getUser().getMuserName(),
+                new OnCompleteListener<MessageBean>() {
+                    @Override
+                    public void onSuccess(MessageBean result) {
+                        Log.i("dayang","onSuccess:result="+result);
+                        if(result!=null&& result.isSuccess()){
+                            loadCollectCount(result.getMsg());
+                        }else{
+                            loadCollectCount("0");
+                        }
+                    }
+                    @Override
+                    public void onError(String error) {
+                        loadCollectCount("0");
+                    }
+                });
+    }
     private void loadUserInfo(User user) {
-        ImageLoader.downloadImg(getContext(), ivUserAvatar, user.getMavatarPath());
+        ImageLoader.setAvatar(ImageLoader.getAvatarUrl(user),getContext(),ivUserAvatar);
         tvUserName.setText(user.getMuserNick());
+        loadCollectCount("0");
     }
 
+    private void loadCollectCount(String count) {
+        tvCollectCount.setText(String.valueOf(count));
+    }
 
     @OnClick({R.id.tv_center_settigns, R.id.center_top, R.id.ivPerson})
     public void onClick(View view) {
         FuLiCenterApplication.setUser(null);
         SharePreferenceUtils.getInstance(getContext()).removeUser();
-       MFGT.gotoSettings(getActivity());
+        MFGT.gotoSettings(getActivity());
     }
+
     @Override
     public void onResume() {
         super.onResume();

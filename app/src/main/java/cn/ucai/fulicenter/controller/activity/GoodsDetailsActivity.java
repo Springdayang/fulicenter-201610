@@ -22,6 +22,7 @@ import cn.ucai.fulicenter.model.net.IModelGoods;
 import cn.ucai.fulicenter.model.net.ModelGoods;
 import cn.ucai.fulicenter.model.net.OnCompleteListener;
 import cn.ucai.fulicenter.model.util.CommonUtils;
+import cn.ucai.fulicenter.model.util.ImageLoader;
 import cn.ucai.fulicenter.view.FlowIndicator;
 import cn.ucai.fulicenter.view.MFGT;
 import cn.ucai.fulicenter.view.SlideAutoLoopView;
@@ -51,7 +52,8 @@ public class GoodsDetailsActivity extends AppCompatActivity {
     RelativeLayout activityGoodsDetails;
     @BindView(R.id.iv_good_collect)
     ImageView ivGoodCollect;
-
+    @BindView(R.id.tv_cart_count)
+    TextView textCount;
     boolean isCollect=false;
     User mCollect;
     @Override
@@ -148,9 +150,23 @@ public class GoodsDetailsActivity extends AppCompatActivity {
                     setCollectStatus();
                 }
             });
+//            loadUserInfo(user);
+//            getCollectCount();
         }
+//        else{
+//            Log.i("dayang","initData :null user");//检测空用户登录界面后退跳转
+//        }
     }
+    private void loadUserInfo(User user){
+        ImageLoader.setAvatar(ImageLoader.getAvatarUrl(user),getApplicationContext(),ivGoodCollect);
+        loadCollectCount("0");
+    }
+    private void getCollectCount(){
 
+    }
+    private void loadCollectCount(String count){
+        textCount.setText(String.valueOf(count));
+    }
     @OnClick(R.id.backClickArea)
     public void onClick() {
         MFGT.finishActivity(this);
@@ -169,6 +185,7 @@ public class GoodsDetailsActivity extends AppCompatActivity {
           setCollect(user);
         }else{
             MFGT.gotoLogin(this);
+            ivGoodCollect.setEnabled(true);
         }
     }
     private void setCollect(User user){
