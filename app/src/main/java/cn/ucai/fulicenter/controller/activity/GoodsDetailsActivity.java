@@ -53,6 +53,7 @@ public class GoodsDetailsActivity extends AppCompatActivity {
     ImageView ivGoodCollect;
 
     boolean isCollect=false;
+    User mCollect;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,25 +163,12 @@ public class GoodsDetailsActivity extends AppCompatActivity {
         }
     }
     @OnClick(R.id.iv_good_collect)
-    public void collect(){
+    public void setCollectListener(){
         User user= FuLiCenterApplication.getUser();
         if(user!=null){
-            model.isCollect(this, goodsId, user.getMuserName(), new OnCompleteListener<MessageBean>() {
-                @Override
-                public void onSuccess(MessageBean result) {
-                    if(result!=null&&result.isSuccess()){
-                        isCollect=true;
-                    }else{
-                        isCollect=false;
-                    }
-                    setCollectStatus();
-                }
-                @Override
-                public void onError(String error) {
-                    isCollect=false;
-                    setCollectStatus();
-                }
-            });
+          setCollect(user);
+        }else{
+            MFGT.gotoLogin(this);
         }
     }
     private void setCollect(User user){
@@ -199,5 +187,6 @@ public class GoodsDetailsActivity extends AppCompatActivity {
                         ivGoodCollect.setEnabled(true);
                     }
                 });
+        mCollect=user;
     }
 }
